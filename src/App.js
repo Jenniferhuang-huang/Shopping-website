@@ -4,86 +4,52 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
+import data from "./data";
+import "./App.css";
+import Navbar from "./navbar";
+import DisplayProducts from "./displayProducts";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: [
-        {
-          id: 1,
-          img: "/cologne.jpg",
-          name: "Unisex Cologne",
-          value: 0,
-        },
-        { id: 2, img: "/iwatch.jpg", name: "Apple iWatch", value: 0 },
-        { id: 3, img: "/mug.jpg", name: "Unique Mug", value: 0 },
-        { id: 4, img: "/wallet.jpg", name: "Mens Wallet", value: 0 },
-      ],
+      products: products
     };
   }
 
+  handleIncrement = (addValue) => {
+    if (addValue.value < 10) {
+      const updatedValue = addValue.value++;
+      this.setState({ updatedValue });
+    }
+  };
+
+  handleDecrement = (subValue) => {
+    if (subValue.value > 0) {
+      const updatedValue = subtractValue.value--;
+      this.setState({ updatedValue });
+    }
+  };
+
   render() {
     return (
-      <div>
-        <NavBar/>
-        <Displayproduct products={this.state.products} />
+      <div className="App">
+        <Navbar
+          totalValue={this.state.products
+            .map((prod) => prod.value)
+            .reduce((acc, curr, index) => acc + curr, 0)}
+          prods={this.state.products}
+          handleIncrement={this.handleIncrement}
+          handleDecrement={this.handleDecrement}
+        />
+        <DisplayProducts
+          products={this.state.products}
+          onIncrement={this.handleIncrement}
+          onDecrement={this.handleDecrement}
+        />
       </div>
     );
   }
-}
-
-function Displayproduct(props) {
-  return (
-    <div>
-      {props.products.map((product) => {
-        return (
-          <div key={product.id} className="border border-1 p-3">
-            <h4 className="mx-5">{product.name}</h4>
-            <img src={product.img} width="150"></img>
-            <span className="mx-5 p-3 border border-3">{product.value}</span>
-            quantity
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-function NavBar() {
-  return (
-    <div className="navbar p-5 bg-info">
-      <h1>Shop to React</h1>
-      <p>
-        <FontAwesomeIcon
-          icon={faShoppingCart}
-          className="fas fa-lg"
-        ></FontAwesomeIcon>
-        items
-      </p>
-    </div>
-  );
 }
 
 export default App;
