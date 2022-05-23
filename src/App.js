@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import data from "./data";
+import products from "./productdata";
 import "./App.css";
 import Navbar from "./navbar";
 import DisplayProducts from "./displayProducts";
@@ -26,7 +26,7 @@ class App extends React.Component {
 
   handleDecrement = (subValue) => {
     if (subValue.value > 0) {
-      const updatedValue = subtractValue.value--;
+      const updatedValue = subValue.value--;
       this.setState({ updatedValue });
     }
   };
