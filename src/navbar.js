@@ -7,8 +7,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DisplayProducts from "./displayProducts";
 import "./index.css";
-import ShowCart from "./showCart"
-import LogIn from "./login"
+import ShowCart from "./showCart";
+import LogIn from "./login";
 
 function Navbar(props) {
   return (
@@ -29,39 +29,37 @@ function Navbar(props) {
         </Link>
       </nav>
 
-       <Routes>
-                <Route 
-                    exact path="/" 
-                    element={
-                        <DisplayProducts 
-                            products={props.prods}
-onIncrement={props.handleIncrement}
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <DisplayProducts
+              products={props.prods}
+              onIncrement={props.handleIncrement}
               onDecrement={props.handleDecrement}
-                            OnSort={props.handleSort}
-                            sortType={props.sortType}
-                            listNum={props.listNum}
-                        />}
-                >
+              OnSort={props.handleSort}
+              sortType={props.sortType}
+              listNum={props.listNum}
+            />
+          }
+        ></Route>
+        <Route
+          path="/showcart"
+          element={
+            <ShowCart
+              cartitems={props.prods}
+              totalQuantity={props.totalValue}
+            />
+          }
+        ></Route>
+        <Route
+          path="/login"
+          element={<LogIn checkoutitems={props.prods} />}
+        ></Route>
+      </Routes>
+    </Router>
+  );
+}
 
-                </Route>
-                <Route 
-                    path="/showcart" 
-                    element={
-                        <ShowCart 
-                            cartitems={props.prods}
-                            totalQuantity={props.totalValue}
-                        />}
-                >
-                </Route>
-                <Route 
-                    path="/login" 
-                    element={
-                        <LogIn checkoutitems={props.prods}/>}
-                >
-                </Route>
-            </Routes>
-        </Router>
-    )
-};
- 
 export default Navbar;

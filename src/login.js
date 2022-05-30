@@ -9,6 +9,7 @@ function LogIn(props) {
   const [picture, setPicture] = useState("");
 
   const responseFacebook = (response) => {
+    console.log(response);
     setData(response);
     setPicture(response.picture.data.url);
     if (response.accessToken) {
@@ -17,48 +18,37 @@ function LogIn(props) {
       setLogin(false);
     }
   };
+
   return (
-    <div className="container">
+<>
       <Card style={{ width: "800px" }} className="mx-auto mt-5">
-        {!login && (
-          <>
-            <Card.Header className="pb-4">
-              <h1>Sign In</h1>
-            </Card.Header>
-            <Card.Body>
-              <Card.Text>
-                <React.Fragment>
-                  <h3>Please login using one of the following:</h3>
-                  <LoginForm />
-                  <FacebookLogin
-                    appId="1726336101043555"
-                    autoLoad={true}
-                    fields="name,email,picture"
-                    scope="public_profile,user_friends"
-                    callback={responseFacebook}
-                    icon="fa-facebook"
-                  />
-                </React.Fragment>
-              </Card.Text>
-            </Card.Body>
-          </>
-        )}
-        {login && (
-          <>
-            <Card.Header className="pb-4">
-              <h1>Checkout</h1>
-            </Card.Header>
-            <Card.Body>
-              <Card.Text>
-                <Welcome fbpic={picture} fbdata={data} />
-              </Card.Text>
-            </Card.Body>
-          </>
-        )}
+        <Card.Header className="pb-4">
+          {!login ? <h1>Sign In</h1> : <h1>Check Out</h1>}
+        </Card.Header>
+        <Card.Body>
+          <Card.Text>
+            {!login && (
+              <React.Fragment>
+                <h3>Please login using one of the following:</h3>
+                <LoginForm />
+                <FacebookLogin
+                  appId="1726336101043555"
+                  autoLoad={true}
+                  fields="name,email,picture"
+                  scope="public_profile,user_friends"
+                  callback={responseFacebook}
+                  icon="fa-facebook"
+                />
+              </React.Fragment>
+            )}
+            {login && <Welcome fbpic={picture} fbdata={data} />}
+          </Card.Text>
+        </Card.Body>
       </Card>
-    </div>
+    </>
   );
 }
+
 
 const LoginForm = () => {
   return (

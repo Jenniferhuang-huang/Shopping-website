@@ -82,7 +82,7 @@ export default function DisplayProducts(props) {
           />
           <p>
             <span className="text-dark">Ratings: </span>
-            {showImg.ratings}/5
+            {showImg.rating}/5
           </p>
         </Modal.Body>
       </Modal>

@@ -63,14 +63,6 @@ class App extends React.Component {
           sortType={this.state.sortType}
           listNum={this.state.listNum}
         />
-        <DisplayProducts
-          products={this.state.products}
-          onIncrement={this.handleIncrement}
-          onDecrement={this.handleDecrement}
-          handleSort={this.handleSort}
-          sortType={this.state.sortType}
-          listNum={this.state.listNum}
-        />
       </div>
     );
   }
