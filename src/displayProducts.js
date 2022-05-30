@@ -21,11 +21,27 @@ export default function DisplayProducts(props) {
 
   return (
     <div>
+      <div className="container col-lg-10 my-5 mx-auto">
+        <label>
+          Sort Price By:
+          <select
+            onChange={(e) => props.OnSort(props.products, e.target.value)}
+          >
+            <option value="norm">Normal</option>
+            <option value="asc">Lowest</option>
+            <option value="desc">Highest</option>
+          </select>
+        </label>
+      </div>
       {props.products.map((product) => {
         return (
           <ListGroup key={product.id} className="products">
             <ListGroupItem className="border border-1 p-3">
-              <h4 className="mx-5">{product.desc}</h4>
+              <div>
+              <h4 className="d-inline mx-5">{product.desc}</h4>
+              <h4 className="d-inline col-lg-3 text-danger">
+                ${product.price}
+              </h4></div>
               <img
                 onClick={() => handleShow(product)}
                 src={product.image}

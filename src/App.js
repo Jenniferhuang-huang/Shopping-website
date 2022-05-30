@@ -13,7 +13,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: products
+      products: products,
+      sortType: "norm",
+      listNum: "",
     };
   }
 
@@ -31,6 +33,22 @@ class App extends React.Component {
     }
   };
 
+  handleSort = (listNum, sortType) => {
+    listNum.sort((a, b) => {
+      switch (sortType) {
+        case "norm":
+          return a.id - b.id;
+          break;
+        case "asc":
+          return a.price - b.price;
+          break;
+        case "desc":
+          return b.price - a.price;
+      }
+    });
+    this.setState({ sortType });
+  };
+
   render() {
     return (
       <div className="App">
@@ -41,11 +59,17 @@ class App extends React.Component {
           prods={this.state.products}
           handleIncrement={this.handleIncrement}
           handleDecrement={this.handleDecrement}
+          handleSort={this.handleSort}
+          sortType={this.state.sortType}
+          listNum={this.state.listNum}
         />
         <DisplayProducts
           products={this.state.products}
           onIncrement={this.handleIncrement}
           onDecrement={this.handleDecrement}
+          handleSort={this.handleSort}
+          sortType={this.state.sortType}
+          listNum={this.state.listNum}
         />
       </div>
     );

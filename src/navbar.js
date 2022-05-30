@@ -7,8 +7,10 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DisplayProducts from "./displayProducts";
 import "./index.css";
+import ShowCart from "./showCart"
+import LogIn from "./login"
 
-export default function Navbar(props) {
+function Navbar(props) {
   return (
     <Router>
       <nav className="navbar p-5 bg-info">
@@ -27,18 +29,39 @@ export default function Navbar(props) {
         </Link>
       </nav>
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <DisplayProducts
-              products={props.prods}
-              onIncrement={props.handleIncrement}
+       <Routes>
+                <Route 
+                    exact path="/" 
+                    element={
+                        <DisplayProducts 
+                            products={props.prods}
+onIncrement={props.handleIncrement}
               onDecrement={props.handleDecrement}
-            />
-          }
-        />
-      </Routes>
-    </Router>
-  );
-}
+                            OnSort={props.handleSort}
+                            sortType={props.sortType}
+                            listNum={props.listNum}
+                        />}
+                >
+
+                </Route>
+                <Route 
+                    path="/showcart" 
+                    element={
+                        <ShowCart 
+                            cartitems={props.prods}
+                            totalQuantity={props.totalValue}
+                        />}
+                >
+                </Route>
+                <Route 
+                    path="/login" 
+                    element={
+                        <LogIn checkoutitems={props.prods}/>}
+                >
+                </Route>
+            </Routes>
+        </Router>
+    )
+};
+ 
+export default Navbar;
